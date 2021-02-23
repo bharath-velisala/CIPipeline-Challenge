@@ -37,5 +37,30 @@ pipeline{
                 bat 'mvn package'
             }
         }
+
+        stage('collect artifact'){
+            steps{
+                archiveArtifacts artifacts:'target/*.jar',followSymlink:false
+            }
+        }
+
+        tage('deploy to artifactory')
+     {
+     steps{
+     
+     rtUpload (
+    serverId: 'Jfrog',
+    spec: '''{
+          "files": [
+            {
+              "pattern": "target/*.jar",
+              "target": "mvn-cal"
+            }
+         ]
+    }''',
+    buildName: 'holyFrog',
+    buildNumber: '1'
+)
+     }}
     }
 }
