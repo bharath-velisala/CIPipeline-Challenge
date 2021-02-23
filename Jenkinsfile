@@ -44,7 +44,7 @@ pipeline{
             }
         }
 
-        tage('deploy to artifactory')
+        stage('deploy to artifactory')
      {
      steps{
      
