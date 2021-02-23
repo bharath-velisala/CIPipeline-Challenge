@@ -22,6 +22,16 @@ pipeline{
             }
         }
 
+        stage('sonar analysis'){
+            steps{
+                withSonarQubeEnv('sonarcube'){
+                    withMaven(maven:'maven'){
+                        bat 'mvn sonar:sonar'
+                    }
+                }
+            }
+
+        }
         stage('maven package'){
             steps{
                 bat 'mvn package'
